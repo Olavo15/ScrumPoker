@@ -5,9 +5,9 @@ name: Frontend CI (Svelte)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
@@ -20,17 +20,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          node-version: 20
+          cache: "npm"
           cache-dependency-path: Front/package-lock.json
 
       - name: Install dependencies
-        working-directory: Front-end
+        working-directory: Front
         run: npm ci
 
-      - name: Build Svelte app
-        working-directory: Front-end
+      - name: Build
+        working-directory: Front
         run: npm run build
