@@ -1,6 +1,7 @@
 <script>
 	import Feature from '$lib/Feature.svelte';
 	import { slide } from 'svelte/transition';
+	import { goto } from '$app/navigation';
 
 	let criarNome = '';
 	let entrarNome = '';
@@ -21,9 +22,22 @@
 			...(privada && { senha: senhaSala })
 		};
 
-		console.log('Payload enviado para API:', payload);
+		console.log('Payload (futuro back):', payload);
+
+		const codigo = Math.random()
+			.toString(36)
+			.substring(2, 8)
+			.toUpperCase();
+
+		goto(`/sala/${codigo}`);
+	}
+
+	function entrarSala() {
+		if (!codigoSala) return;
+		goto(`/sala/${codigoSala.toUpperCase()}`);
 	}
 </script>
+
 
 <div
 	class="flex min-h-screen flex-col items-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-6 text-white"
